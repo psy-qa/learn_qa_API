@@ -1,3 +1,5 @@
 allure-pytest
-requests
+requests~=2.31.0
 pytest
+lxml~=5.1.0
+beautifulsoup4~=4.12.2
