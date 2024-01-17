@@ -1,7 +1,7 @@
 import requests
 
 
-class MyRequests():
+class MyRequests:
     @staticmethod
     def post(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
         return MyRequests._send(url, data, headers, cookies, 'POST')
@@ -23,9 +23,9 @@ class MyRequests():
 
         url = f"https://playground.learnqa.ru/api{url}"
 
-        if headers in None:
+        if headers is None:
             headers = {}
-        if cookies in None:
+        if cookies is None:
             cookies = {}
 
         if method == 'GET':
