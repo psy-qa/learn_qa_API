@@ -1,9 +1,10 @@
 import datetime
 import os
+from requests import Response
 
 
 class Logger:
-    file_name = f'logs/log_' + str(datetime.datetime.now()) + ".log"
+    file_name = f'./logs/log_' + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")) + ".log"
 
     @classmethod
     def _write_log_to_file(cls, data: str):
@@ -22,4 +23,19 @@ class Logger:
         data_to_add += f"Request headers: {headers}\n"
         data_to_add += f"Request cookie: {cookie}\n"
         data_to_add += "\n"
+ 
+        cls._write_log_to_file(data_to_add)
+    
+    @classmethod
+    def add_response(cls, response: Response):
+        
+        cookie_as_dict = dict(response.cookies)
+        headers_as_dict = dict(response.headers)
 
+        data_to_add = f"Response code: {response.status_code}"
+        data_to_add += f"Response text: {response.text}"
+        data_to_add += f"Response headers: {response.headers}"
+        data_to_add += f"Response cookie: {response.cookies}"
+        data_to_add += "\n ========== \n"
+
+        cls._write_log_to_file(data_to_add)
